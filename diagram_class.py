@@ -6,90 +6,47 @@ import plantuml
 uml_text = """
 @startuml
 class User {
-    -id: int
-    -name: str
-    -email: str
-    -password: str
-    +login()
-    +logout()
-    +search_item()
-    +view_results()
-    +select_item()
-    +add_to_cart()
-    +checkout()
+    -sessionId: string
+    +purchase(Item)
 }
 
 class Admin {
-    -id: int
-    -name: str
-    -email: str
-    -password: str
+    -userId: string
+    -password: string
     +login()
-    +logout()
-    +add_item()
-    +delete_item()
+    +add_item(Item)
+    +delete_item(Item)
 }
 
 class Item {
-    -id: int
-    -name: str
-    -category: str
-    -price: float
-    -is_sold: bool
+    -id: string
+    -name: string
+    -image: string
+    -price: Number
     +generate_id()
     +add_item_to_db()
     +remove_item_from_db()
 }
 
-class Cart {
-    -items: list
-    -total_price: float
-    +add_item()
-    +remove_item()
-    +checkout()
-}
 
 class OnlineStore {
-    -users: dict
-    -admins: dict
-    -items: dict
-    -cart: Cart
-    +add_user()
-    +remove_user()
-    +add_admin()
-    +remove_admin()
-    +get_item()
-    +add_item()
-    +remove_item()
-    +display_live_updates()
+    -items: Item[]
+    +get_items()
+    +add_item(Item)
+    +remove_item(Item)
 }
 
 class AuctionHouse {
-    -items: dict
-    +get_item()
-    +add_item()
-    +remove_item()
-    +display_live_updates()
+    -items: Item[]
+    +get_items()
 }
 
-User --> Item: selects
-User --> Cart: adds
-User --> Cart: removes
-User --> OnlineStore: checks out
-User --> OnlineStore: views
-User --> OnlineStore: searches
-User --> OnlineStore: logs in
-User --> OnlineStore: logs out
-Admin --> Item: adds
-Admin --> Item: removes
-Admin --> OnlineStore: logs in
-Admin --> OnlineStore: logs out
-OnlineStore --> User
-OnlineStore --> Admin
-OnlineStore --> Item
-OnlineStore --> Cart
-OnlineStore --> AuctionHouse
-AuctionHouse --> Item
+User <-- Admin
+AuctionHouse <-- User
+OnlineStore <-- User
+AuctionHouse <-- Item
+OnlineStore <-- Item
+
 @enduml
 """
 

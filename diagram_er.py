@@ -5,21 +5,31 @@ import plantuml
 
 uml_text = """
 @startuml
-actor Admin
-participant OnlineStore
-participant AuctionHouse
-participant BackendDatabase
+entity Item {
+  * item_id: String   PK
+  * image: String
+  * price: Number
+  * name: String
 
-Admin -> OnlineStore: login()
-OnlineStore -> Admin: Acknowledge Login
-Admin -> OnlineStore: add_item(Item)
-OnlineStore -> BackendDatabase: add item to database
-BackendDatabase -> OnlineStore: update item list
-BackendDatabase -> AuctionHouse: update item list
+}
+
+entity User {
+  * session_id: String   PK
+}
+
+entity Admin {
+  * user_id: String   PK
+  * password: String
+
+}
+
+Item ||..|| User
+Item ||..|| Admin
+
 @enduml
 """
 
-img_path = 'UML_Diagrams/sequence_diagram.png'
+img_path = 'UML_Diagrams/er_diagram.png'
 
 # Create the UML_Diagrams directory if it doesn't exist
 os.makedirs('UML_Diagrams', exist_ok=True)
@@ -34,5 +44,7 @@ with open(img_path, 'wb') as f:
     f.write(img_bytes)
 
 # Print the file path and open the image in the default viewer
-print(f"Generated sequence diagram at {os.path.abspath(img_path)}")
+print(f"Generated class diagram at {os.path.abspath(img_path)}")
 webbrowser.open(os.path.abspath(img_path))
+
+# python3 diagram_class.py

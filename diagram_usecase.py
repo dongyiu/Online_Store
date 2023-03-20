@@ -16,14 +16,16 @@ rectangle "Online Store" {
     Admin --> (Delete Item)
     Admin --> (Add Item)
 
-    (Purchase Item) ..> (Item) : include
-    (Delete Item) ..> (Item) : delete
-    (Add Item) ..> (Item) : add
-    (Add Item) ..> (Unique Identifier) : creates
-    (Item) --> (Sold Item) : <<sells>>
-    (Sold Item) --> (Remove Item) : <<remove>>
+    (Add Item) ..> (Authenticate User) : extend
+    (Add Item) <.. (Generate Unique Identifier) : includes
+    (Add Item) <.. (Create Item) : includes
 
-    (Unique Identifier) ..> (Item) : identifies
+    (Delete Item) ..> (Authenticate User) : extend
+    (Delete Item) <.. (Search Item) : includes
+    (Search Item) <.. (Remove Item From Database) : includes
+
+    (Purchase Item) <.. (Search Item) : includes
+
 }
 @enduml
 """
