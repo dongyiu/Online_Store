@@ -56,6 +56,6 @@ Distributed under the MIT License. See [LICENSE](https://github.com///blob/main/
 ## Authors
 
 * **DongYiu** - *Computer Science Student* - [DongYiu](https://github.com/notabC) - *Frontend and Backend design*
-* **Cole** - *Computer Science Student* - [Cole](https://github.com/dastardlycole) - *Testing and Debugging*
-* **Dave** - *Computer Science Student* - [Dave](https://github.com/Davemtok) - *Testing and Debugging*
+* **Cole** - *Computer Science Student* - [Cole](https://github.com/dastardlycole) - *Backend design*
+* **Dave** - *Computer Science Student* - [Dave](https://github.com/Davemtok) - *Database design*
 * **Krish** - *Computer Science Student* - [Krish](https://github.com/Krrishhhh) - *Testing and Debugging*
