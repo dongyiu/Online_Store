@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <header class="py-3">
+    <header class="py-4 mb-4">
       <div
         class="d-flex flex-column flex-md-row align-items-center justify-content-between"
       >
@@ -18,21 +18,25 @@
         />
       </div>
       <div class="row">
-        <div class="col-4" v-for="item in paginatedItems" :key="item.itemId">
-          <div class="card mb-3">
-            <img :src="item.itemPicture" class="card-img-top" alt="..." />
-            <div class="card-body">
-              <h5 class="card-title">{{ item.itemName }}</h5>
-              <p class="card-text">Price: ${{ item.itemPrice }}</p>
-              <button class="btn btn-primary mr-2" @click="showBidModal(item)">
-                Bid
-              </button>
-              <button class="btn btn-success" @click="buyItem(item)">
-                Buy
-              </button>
+        <transition-group tag="div" name="slide" class="d-flex flex-wrap">
+          <div class="col-md-6 col-lg-4" v-for="item in paginatedItems" :key="item.itemId">
+            <div class="card mb-4 shadow-sm h-100">
+              <img :src="item.itemPicture" class="card-img-top" alt="..." />
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title text-truncate">{{ item.itemName }}</h5>
+                <p class="card-text">Price: ${{ item.itemPrice }}</p>
+                <div class="mt-auto d-flex justify-content-between align-items-center">
+                  <button class="btn btn-primary" @click="showBidModal(item)">
+                    Bid
+                  </button>
+                  <button class="btn btn-success" @click="buyItem(item)">
+                    Buy
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+        </transition-group>
       </div>
       <div class="d-flex justify-content-center">
         <b-pagination
@@ -41,7 +45,7 @@
           :per-page="itemsPerPage"
           align="center"
           size="md"
-          class="my-3"
+          class="my-4"
         ></b-pagination>
       </div>
     </div>
@@ -67,6 +71,23 @@
     </b-modal>
   </div>
 </template>
+
+<style scoped>
+.slide-enter-active {
+  transition: all 0.5s ease;
+}
+
+.slide-leave-active {
+  transition: all 0.5s ease;
+}
+
+.slide-enter,
+.slide-leave-to {
+  transform: translateX(-30px);
+  opacity: 0;
+}
+</style>
+
 
 <script>
 export default {
@@ -118,7 +139,7 @@ export default {
     return {
       currentPage: 1,
       itemsPerPage: 6,
-      items: [
+      items: [] || [
         {
           itemId: 1,
           itemName: "Item 1",

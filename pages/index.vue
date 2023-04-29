@@ -2,7 +2,6 @@
   <div class="container">
     <b-navbar toggleable="lg" type="light" variant="light" class="mb-3">
       <b-navbar-brand href="#">Online Store</b-navbar-brand>
-      <!-- <b-navbar-toggle target="nav-collapse"></b-navbar-toggle> -->
     </b-navbar>
 
     <div class="container mt-3">
@@ -23,9 +22,13 @@
           </button>
         </div>
       </div>
-      <div class="row">
-        <div class="col-4" v-for="item in paginatedItems" :key="item.itemId">
-          <div class="card mb-3" @dblclick="deleteItem(item)">
+      <transition-group tag="div" name="slide" class="d-flex flex-wrap">
+        <div
+          class="col-12 col-sm-6 col-md-4 col-lg-3"
+          v-for="item in paginatedItems"
+          :key="item.itemId"
+        >
+          <div class="card mb-3 item-card" @dblclick="deleteItem(item)">
             <img
               :src="item.itemPicture"
               @error="setFallbackImage"
@@ -40,7 +43,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </transition-group>
       <div class="d-flex justify-content-center">
         <b-pagination
           v-model="currentPage"
@@ -125,6 +128,22 @@
   </div>
 </template>
 
+<style scoped>
+.slide-enter-active {
+  transition: all 0.5s ease;
+}
+
+.slide-leave-active {
+  transition: all 0.5s ease;
+}
+
+.slide-enter,
+.slide-leave-to {
+  transform: translateX(-30px);
+  opacity: 0;
+}
+</style>
+
 <script>
 export default {
   computed: {
@@ -149,8 +168,8 @@ export default {
       authorised: {},
       newItem: {},
       currentPage: 1,
-      itemsPerPage: 6,
-      items: [
+      itemsPerPage: 8,
+      items: [] || [
         {
           itemId: 1,
           itemName: "Item 1",
