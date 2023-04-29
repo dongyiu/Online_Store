@@ -259,12 +259,12 @@ export default {
           await this.$axios.$post(
             `/item?itemName=${this.newItem.name}&itemPrice=${this.newItem.price}&itemPicture=${this.newItem.link}`
           );
-          this.items.push({
-            itemId: this.items.length + 1,
-            itemName: this.newItem.name,
-            itemPrice: this.newItem.price,
-            itemPicture: this.newItem.link,
-          });
+          // this.items.push({
+          //   itemId: this.items.length + 1,
+          //   itemName: this.newItem.name,
+          //   itemPrice: this.newItem.price,
+          //   itemPicture: this.newItem.link,
+          // });
           this.newItemModal = false;
         }
       });
